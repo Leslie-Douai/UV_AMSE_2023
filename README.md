@@ -1,2 +1,15 @@
 # UV_AMSE_2023
-Repo de Leslie Rineau 
+Respository Leslie Rineau
+
+## Installation
+```bash
+git clone https://github.com/Leslie-Douai/UV_AMSE_2023
+```
+Pour avoir accès à la branche test
+``` bash
+git checkout test
+```
+Pour avoir accès au cours et TP
+``` bash
+https://ceri-num.gitbook.io/uv-amse
+```
