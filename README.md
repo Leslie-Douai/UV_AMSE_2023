@@ -13,3 +13,8 @@ Pour avoir accès au cours et TP
 ``` bash
 https://ceri-num.gitbook.io/uv-amse
 ```
+
+###Pour mettre flutter dans le PATH
+```
+export PATH="$PATH:`pwd`/flutter/bin"
+```
