@@ -14,7 +14,7 @@ Pour avoir accès au cours et TP
 https://ceri-num.gitbook.io/uv-amse
 ```
 
-###Pour mettre flutter dans le PATH
+### Pour mettre flutter dans le PATH
 ```
 export PATH="$PATH:`pwd`/flutter/bin"
 ```
