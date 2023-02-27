@@ -15,9 +15,9 @@ https://ceri-num.gitbook.io/uv-amse
 ```
 
 ### Pour mettre flutter dans le PATH
-Aller dans le dossier au dessus de Flutter
+Mettre dans le bashrc
 ```
-echo 'export PATH="$PATH:$HOME/flutter/bin"' >> ~/.bashrc
+echo 'export PATH="$PATH:$HOME/Bureau/flutter/bin"' >> ~/.bashrc
 export PATH="$PATH:`pwd`/flutter/bin"
 source ~/.bashrc
 ```
