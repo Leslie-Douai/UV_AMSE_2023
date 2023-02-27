@@ -11,12 +11,11 @@ class DisplayImageWidget extends StatelessWidget {
         ),
         // body: Center(child: Image.network("https://picsum.photos/1024")));
         body: Center(
-          child:
-            Image.asset(
-                'assets/images/0-Star-Wars-memes.jpeg',
-                width: 350,
-                fit: BoxFit.cover,
-                ),
+          child: Image.asset(
+            'assets/images/pic.jpeg',
+            width: 350,
+            fit: BoxFit.cover,
+          ),
         ));
   }
 }

@@ -3,13 +3,21 @@ import 'package:flutter/material.dart';
 // import 'util.dart';
 import 'exo1.dart' as exo1;
 import 'exo2.dart' as exo2;
+import 'exo4.dart' as exo4;
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: MenuPage());
+    return MaterialApp(
+      title: 'UV-AMSE-Flutter',
+      theme: ThemeData(
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.black54),
+      ),
+      home: MenuPage(),
+    );
   }
 }
 
@@ -23,13 +31,17 @@ class Exo {
 
 List exos = [
   Exo(
-      title: 'Exercice 1 ibis',
+      title: 'Exercice 1',
       subtitle: 'Simple image',
       buildFunc: (context) => exo1.DisplayImageWidget()),
   Exo(
       title: 'Exercice 2',
       subtitle: 'Rotate&Scale image',
       buildFunc: (context) => exo2.DisplayImageWidget()),
+  Exo(
+      title: 'Exercice 4',
+      subtitle: 'Lets crop the lord',
+      buildFunc: (context) => exo4.DisplayImageWidget()),
 ];
 
 class MenuPage extends StatelessWidget {
@@ -37,7 +49,7 @@ class MenuPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('TP2'),
+          title: Text('ThéPaix II'),
         ),
         body: ListView.builder(
             itemCount: exos.length,
