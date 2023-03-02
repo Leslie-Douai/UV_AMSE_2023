@@ -52,15 +52,6 @@ class _TaquinTransformState extends State<TaquinTransform> {
       )
     ]);
   }
-
-  Widget createTileWidgetFrom(Tile tile) {
-    return InkWell(
-      child: tile.croppedImageTile(_taille.toInt()),
-      onTap: () {
-        print("tapped on tile");
-      },
-    );
-  }
 }
 
 class Tile {
@@ -95,9 +86,15 @@ List<Widget> generateCroppedTileList(int taille) {
       double Align_y = (((y - 1) * (2)) / (taille - 1)) - 1;
 
       l.add(Padding(
-          padding: EdgeInsets.all(0.4),
+        padding: EdgeInsets.all(0.4),
+        child: InkWell(
           child: Tile(alignment: Alignment(Align_x, Align_y))
-              .croppedImageTile(taille)));
+              .croppedImageTile(taille),
+          onTap: () {
+            print("tapped on tile");
+          },
+        ),
+      ));
     }
   }
 
