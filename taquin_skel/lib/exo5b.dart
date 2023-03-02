@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 class DisplayImageWidget extends StatelessWidget {
   @override
@@ -37,60 +38,7 @@ class _TaquinTransformState extends State<TaquinTransform> {
         mainAxisSpacing: 1,
         shrinkWrap: true,
         crossAxisCount: _taille.toInt(),
-        children: <Widget>[
-          Container(
-            padding: const EdgeInsets.all(4),
-            child: this.createTileWidgetFrom(tile),
-          ),
-          Container(
-            padding: const EdgeInsets.all(4),
-            child: this.createTileWidgetFrom(Tile(
-                imageURL: 'assets/images/pic.jpeg',
-                alignment: Alignment(0, -1))),
-          ),
-          Container(
-            padding: const EdgeInsets.all(4),
-            child: this.createTileWidgetFrom(Tile(
-                imageURL: 'assets/images/pic.jpeg',
-                alignment: Alignment(1, -1))),
-          ),
-          Container(
-            padding: const EdgeInsets.all(4),
-            child: this.createTileWidgetFrom(Tile(
-                imageURL: 'assets/images/pic.jpeg',
-                alignment: Alignment(-1, 0))),
-          ),
-          Container(
-            padding: const EdgeInsets.all(4),
-            child: this.createTileWidgetFrom(Tile(
-                imageURL: 'assets/images/pic.jpeg',
-                alignment: Alignment(0, 0))),
-          ),
-          Container(
-            padding: const EdgeInsets.all(4),
-            child: this.createTileWidgetFrom(Tile(
-                imageURL: 'assets/images/pic.jpeg',
-                alignment: Alignment(1, 0))),
-          ),
-          Container(
-            padding: const EdgeInsets.all(4),
-            child: this.createTileWidgetFrom(Tile(
-                imageURL: 'assets/images/pic.jpeg',
-                alignment: Alignment(-1, 1))),
-          ),
-          Container(
-            padding: const EdgeInsets.all(4),
-            child: this.createTileWidgetFrom(Tile(
-                imageURL: 'assets/images/pic.jpeg',
-                alignment: Alignment(0, 1))),
-          ),
-          Container(
-            padding: const EdgeInsets.all(4),
-            child: this.createTileWidgetFrom(Tile(
-                imageURL: 'assets/images/pic.jpeg',
-                alignment: Alignment(1, 1))),
-          ),
-        ],
+        children: generateCroppedTileList(_taille.toInt()),
       ),
       Slider(
         value: _taille,
@@ -107,7 +55,7 @@ class _TaquinTransformState extends State<TaquinTransform> {
 
   Widget createTileWidgetFrom(Tile tile) {
     return InkWell(
-      child: tile.croppedImageTile(),
+      child: tile.croppedImageTile(_taille.toInt()),
       onTap: () {
         print("tapped on tile");
       },
@@ -119,23 +67,41 @@ class Tile {
   String imageURL;
   Alignment alignment;
 
-  Tile({this.imageURL, this.alignment});
+  Tile({this.imageURL = 'assets/images/pic.jpeg', this.alignment});
 
-  Widget croppedImageTile() {
+  Widget croppedImageTile(int taille) {
     return FittedBox(
       fit: BoxFit.fill,
       child: ClipRect(
         child: Container(
           child: Align(
             alignment: this.alignment,
-            widthFactor: 0.3,
-            heightFactor: 0.3,
+            widthFactor: 1 / taille,
+            heightFactor: 1 / taille,
             child: Image.network(this.imageURL),
           ),
         ),
       ),
     );
   }
+}
+
+List<Widget> generateCroppedTileList(int taille) {
+  List<Widget> l = [];
+
+  for (var y = 1; y < taille + 1; y++) {
+    for (var x = 1; x < taille + 1; x++) {
+      double Align_x = (((x - 1) * (2)) / (taille - 1)) - 1;
+      double Align_y = (((y - 1) * (2)) / (taille - 1)) - 1;
+
+      l.add(Padding(
+          padding: EdgeInsets.all(0.4),
+          child: Tile(alignment: Alignment(Align_x, Align_y))
+              .croppedImageTile(taille)));
+    }
+  }
+
+  return l;
 }
 
 Tile tile =
