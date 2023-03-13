@@ -14,22 +14,3 @@ Pour avoir accès au cours et TP
 https://ceri-num.gitbook.io/uv-amse
 ```
 
-### Pour mettre flutter dans le PATH
-Mettre dans le bashrc
-```
-echo 'export PATH="$PATH:$HOME/Bureau/flutter/bin"' >> ~/.bashrc
-export PATH="$PATH:`pwd`/flutter/bin"
-source ~/.bashrc
-```
-## Lancement my_flutter_hello_app
-```
-cd my_flutter_hello_app
-flutter create .
-flutter run
-```
-
-## TO DO TP1
-https://ceri-num.gitbook.io/uv-amse/tp1
-
-## TO DO TP2
-https://ceri-num.gitbook.io/uv-amse/tp2
