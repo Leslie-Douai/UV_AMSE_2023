@@ -7,7 +7,7 @@ import 'exo4.dart' as exo4;
 import 'exo5.dart' as exo5;
 import 'exo5b.dart' as exo5b;
 import 'exo6.dart' as exo6;
-import 'exo6b.dart' as exo6b;
+import 'exo7.dart' as exo6b;
 
 void main() => runApp(MyApp());
 
@@ -59,8 +59,8 @@ List exos = [
       subtitle: 'I like to move it',
       buildFunc: (context) => exo6.DisplayImageWidget()),
   Exo(
-      title: 'Exercice 6b',
-      subtitle: 'I like to move it',
+      title: 'Exercice 7',
+      subtitle: 'Last Hope',
       buildFunc: (context) => exo6b.DisplayImageWidget()),
 ];
 

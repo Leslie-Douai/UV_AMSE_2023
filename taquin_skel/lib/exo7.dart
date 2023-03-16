@@ -6,8 +6,6 @@ math.Random random = new math.Random();
 int Xtouch = 2;
 int Ytouch = 2;
 
-String textAppBar = 'Crop the lord';
-
 Tile tile =
     new Tile(imageURL: 'assets/images/pic.jpeg', alignment: Alignment(-1, -1));
 
@@ -16,16 +14,12 @@ class DisplayImageWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(textAppBar),
+          title: Text('Find the right path'),
           centerTitle: true,
         ),
         body: Center(
             child: Column(children: [
           TaquinTransform(), //Ici
-          Container(
-              height: 200,
-              child:
-                  Image.network('assets/images/pic.jpeg', fit: BoxFit.cover)),
         ])));
   }
 }
@@ -42,6 +36,7 @@ class _TaquinTransformState extends State<TaquinTransform> {
   int indexBlank = 2;
   int lastChange = 0;
   bool shuff = false;
+  int coup = 0;
 
   @override
   void initState() {
@@ -53,6 +48,7 @@ class _TaquinTransformState extends State<TaquinTransform> {
     _tiles[indexBlank] =
         Tile(alignment: Alignment(0, 0)).BlankTile(_taille.toInt());
     shuffleTaquin();
+    coup = 0;
   }
 
   _changeTaille() {
@@ -81,6 +77,25 @@ class _TaquinTransformState extends State<TaquinTransform> {
     }
 
     shuff = false;
+    coup = 0;
+  }
+
+  setShuffleDifficulty(int diff) {
+    shuff = true;
+    for (var k = 0; k < diff; k++) {
+      List index = [
+        indexBlank - _taille,
+        indexBlank - 1,
+        indexBlank + 1,
+        indexBlank + _taille
+      ];
+      index.removeWhere(
+          (element) => element < 0 || element > _taille * _taille - 1);
+      _onTapTile(index[random.nextInt(index.length)]);
+    }
+
+    shuff = false;
+    coup = 0;
   }
 
   bool possible(int x) {
@@ -110,6 +125,7 @@ class _TaquinTransformState extends State<TaquinTransform> {
         lastChange = indexBlank;
       }
       indexBlank = index;
+      coup++;
 
       // print(
       //     "NewBlank :" + indexBlank.toString() + "/ Tap :" + index.toString());
@@ -118,6 +134,7 @@ class _TaquinTransformState extends State<TaquinTransform> {
       if (!shuff && win()) {
         _showWinDialog(context);
         shuffleTaquin();
+        coup = 0;
       }
       setState(() {});
     }
@@ -187,12 +204,43 @@ class _TaquinTransformState extends State<TaquinTransform> {
           });
         },
       ),
+      Text("Coups : $coup"),
       ElevatedButton(
-        onPressed: () {
+        onPressed: () => setState(() {
+          coup++;
           _undo();
-        },
-        child: Text('Undo'),
+        }),
+        child: Text("Undo"),
+        style: ElevatedButton.styleFrom(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(5),
+          ),
+          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        ),
       ),
+      Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+        ElevatedButton(
+          onPressed: () {
+            setShuffleDifficulty((_taille * _taille).toInt());
+          },
+          child: Text('Easy'),
+        ),
+        ElevatedButton(
+          onPressed: () {
+            setShuffleDifficulty(
+                (_taille * _taille * _taille * _taille).toInt());
+          },
+          child: Text('Medium'),
+        ),
+        ElevatedButton(
+          onPressed: () {
+            setShuffleDifficulty(
+                (_taille * _taille * _taille * _taille * _taille * _taille)
+                    .toInt());
+          },
+          child: Text('Hard'),
+        )
+      ]),
     ]);
   }
 }

@@ -1,8 +1,17 @@
 # UV_AMSE_2023
 Respository Leslie Rineau
 
-# Retard d'1 ou 2 jours estimés sur le pull final
-# Raison: maladie et déménagement
+# Retard : rendue jeudi 16 mars à 3h
+
+## Fonctionnalités
+
++ Regler la taille
++ Choisir la difficulté
++ Afficher le plateau de jeu
++ Compteur de déplacements
++ Jouable
++ Indication de victoire + reset
++ Annulation du dernier coup
 
 ## Installation
 ```bash
